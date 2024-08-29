@@ -148,28 +148,36 @@
     </div>
 
     <script>
-        // Menggerakkan teks marquee
         function startMarquee() {
-            // Your existing startMarquee function remains unchanged
+        // Fungsi untuk memperbarui tampilan dengan pemisah ribuan
         }
-
+        
         startMarquee();
-
-        // Fungsi kalkulator
+    
+        function updateDisplay() {
+            const display = document.getElementById('display');
+            const value = display.value.replace(/,/g, ''); // Hapus koma yang sudah ada
+            display.value = Number(value).toLocaleString('en');
+        }
+        // Fungsi untuk menambah nilai ke layar kalkulator
         function appendToDisplay(value) {
             const display = document.getElementById('display');
             if (display.value === 'Error') display.value = '';
             display.value += value;
+            
         }
 
+        // Fungsi untuk membersihkan layar kalkulator
         function clearDisplay() {
             document.getElementById('display').value = '';
         }
 
+        // Fungsi untuk menghitung hasil
         function calculateResult() {
             const display = document.getElementById('display');
             try {
-                display.value = eval(display.value);
+                const result = eval(display.value.replace(/,/g, '')); // Evaluasi tanpa koma
+                display.value = Number(result).toLocaleString('en'); // Tampilkan hasil dengan koma
             } catch {
                 display.value = 'Error';
             }
